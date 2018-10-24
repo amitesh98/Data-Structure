@@ -1,0 +1,20 @@
+
+myfoo=list()
+def combine(n):
+    global foo
+    temp1=[]
+    if n==1:
+      foo.append('0')
+      foo.append('1')
+      return foo
+    else:
+      for i in combine(n-1):
+        temp1.append('0'+i)
+        temp1.append('1'+i)
+      foo=temp1
+    return foo
+n=int(input())
+combine(n)
+print((foo))
+
+#Add the driver code here

@@ -1,0 +1,37 @@
+
+def rightfill(arr):
+  currmax=arr[-1]
+  count=0
+  for i in arr[::-1]:
+    if i<currmax:
+      count+=(currmax-i)
+    else:
+      currmax=i
+  return count
+  #pass
+def leftfill(arr):
+  currmax=arr[0]
+  count=0
+  for i in arr:
+    if i<currmax:
+      count+=(currmax-i)
+    else:
+      currmax=i
+  return count
+  #pass
+def waterfill(arr):
+  l=len(arr)
+  maxval=max(arr)
+  maxind=arr.index(maxval)
+  #print(maxind)
+  w1=rightfill(arr[maxind:l])
+  #print(w1)
+  w2=leftfill(arr[0:maxind+1])
+  #print(w2)
+  return w1+w2
+t=int(input())
+for i in range(t):
+  n=int(input())
+  a=list(map(int,input().split()))
+  #a=[7, 4, 0 ,9]
+  print(waterfill(a))

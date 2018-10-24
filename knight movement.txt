@@ -1,0 +1,36 @@
+moves=list()
+s=list()
+visit=[[False for i in range(8)] for j in range(8)]
+def validmove(x,y):
+  if x>=0 and x<8 and y>=0 and y<8:
+    return True
+  return False
+
+def minmoves(startx,starty,endx,endy):
+  global moves
+  global visit
+  global s
+  xm=[-2, -1, 1, 2, -2, -1, 1, 2]
+  ym=[-1, -2, -2, -1, 1, 2, 2, 1]
+  s.append([startx,starty,0])
+  visit[startx][starty]=True
+  while len(s)>0:
+    #print(s.size())
+    t=s.pop(0)
+    #print("-",t[0],t[1],"-")
+    if t[0]==endx and t[1]==endy:
+        #print("Success")
+        moves.append(t[2])
+        #return t[2]
+    for i in range(8):
+      tx=t[0]+xm[i]
+      ty=t[1]+ym[i]
+      d=t[2]
+      if validmove(tx,ty) and not(visit[tx][ty]):
+        #print(tx,ty)
+        visit[tx][ty]=True
+        s.append([tx,ty,d+1])
+
+minmoves(7,7,0,1)
+print(min(moves))
+

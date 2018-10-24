@@ -1,0 +1,40 @@
+import copy
+dictval=list()
+op=list()
+def exist(st):
+	global dictval
+	for i in dictval:
+		if i.startswith(st):
+			return True
+	return False
+def string(st,s=[],curr=''):
+	global op
+	if len(st)==0:
+		op.append(" ".join(s))
+		return 
+	i=0
+	n=len(st)
+	while(n>0):
+		curr+=st[i]
+		if curr in dictval:
+			if i+1<len(st) and exist(curr+st[i+1]):
+				temp=copy.copy(s)
+				string(st[i+1:],s,curr)
+				s=temp
+			s.append(curr)
+			string(st[i+1:],s)
+			return
+		i+=1
+		n-=1
+
+t=int(input())
+for i in range(t):
+    n=int(input())
+    dictval=list(map(str,input().split()))
+    st=input()
+    string(st,[],'')
+    op.sort()
+    for i in op:
+	    print('('+i+')',end="")
+    print()
+    op=[]
